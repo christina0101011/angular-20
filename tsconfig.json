@@ -13,7 +13,47 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@services/*": [
+        "./src/app/core/services/*"
+      ],
+      "@components/*": [
+        "./src/app/shared/components/*"
+      ],
+      "@accounts-interfaces/*": [
+        "./src/app/features/accounts/interfaces/*"
+      ],
+      "@market-interfaces/*": [
+        "./src/app/features/market-overview/interfaces/*"
+      ],
+      "@taxes-interfaces/*": [
+        "./src/app/features/tax-hub/interfaces/*"
+      ],
+      "crypto": [
+        "./node_modules/crypto-browserify"
+      ],
+      "stream": [
+        "./node_modules/stream-browserify"
+      ],
+      "assert": [
+        "./node_modules/assert"
+      ],
+      "http": [
+        "./node_modules/stream-http"
+      ],
+      "https": [
+        "./node_modules/https-browserify"
+      ],
+      "os": [
+        "./node_modules/os-browserify"
+      ],
+      "process": [
+        "./node_modules/process/browser"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
