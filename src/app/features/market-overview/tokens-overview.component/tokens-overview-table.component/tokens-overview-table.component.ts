@@ -19,22 +19,21 @@ export class TokensOverviewTableComponent implements AfterViewInit {
   public tokensList = input.required<Erc20Token[]>();
   public loading: boolean = true;
   public displayedColumns: string[] = ['symbol', 'logo', 'name', 'day', 'week', 'price'];
+  
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) matTable!: MatTable<any>;
 
   constructor() {
     effect(() => {
-      const tokens = this.tokensList();
-      this.tableData = new MatTableDataSource(tokens);
-      this.tableData.sort = this.sort;
-      if (tokens.length) {
+      this.tableData.data = this.tokensList();; 
+      if (this.tokensList().length) {
         this.loading = false;
       }
     });
   }
   
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) matTable!: MatTable<any>;
-  
   ngAfterViewInit(): void {
+    this.tableData.sort = this.sort;
     this.setCustomSortAccessors();
   }
 
