@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, effect, inject, input, ViewChild } from '@angular/core';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Erc20Token } from '@market-interfaces/top-erc20-tokens-list';
+import { Erc20Token } from '@market-interfaces/top-erc20-tokens';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 

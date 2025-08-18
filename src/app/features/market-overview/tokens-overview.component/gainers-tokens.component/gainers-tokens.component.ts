@@ -12,7 +12,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class GainersTokensComponent {
   private marketDataService = inject(MarketDataService);
   public tokensList = toSignal(this.marketDataService.gainersERC20TokensList$, { initialValue: [] });
-  public loading = signal(true);
   
   constructor() {
     this.marketDataService.fetchGainingERC20Tokens();

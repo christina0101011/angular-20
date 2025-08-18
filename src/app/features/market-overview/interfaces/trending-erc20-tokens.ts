@@ -1,4 +1,4 @@
-import { Erc20Token } from './top-erc20-tokens-list';
+import { Erc20Token } from './top-erc20-tokens';
 
 export interface TrendingErc20TokensInterface {
   gainers: Erc20Token[];
