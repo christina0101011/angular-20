@@ -1,5 +1,6 @@
 import { PopularTokensComponent } from "../../features/market-overview/tokens-overview.component/popular-tokens.component/popular-tokens.component";
-import { TrendingTokensComponent } from "../../features/market-overview/tokens-overview.component/trending-tokens.component/trending-tokens.component";
+import { GainersTokensComponent } from "../../features/market-overview/tokens-overview.component/gainers-tokens.component/gainers-tokens.component";
+import { LosersTokensComponent } from "../../features/market-overview/tokens-overview.component/losers-tokens.component/losers-tokens.component";
 
 export const TOKENS_OVERVIEW = [
   {
@@ -10,11 +11,11 @@ export const TOKENS_OVERVIEW = [
   {
     label: 'Gainers',
     icon: 'icons/trending.svg',
-    component: TrendingTokensComponent,
+    component: GainersTokensComponent,
   },
   {
     label: 'Losers',
     icon: 'icons/trending.svg',
-    component: TrendingTokensComponent,
+    component: LosersTokensComponent,
   }
 ]

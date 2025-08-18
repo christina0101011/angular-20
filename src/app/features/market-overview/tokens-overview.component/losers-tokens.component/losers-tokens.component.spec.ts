@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrendingTokensComponent } from './trending-tokens.component';
+import { LosersTokensComponent } from './losers-tokens.component';
 
-describe('TrendingTokensComponent', () => {
-  let component: TrendingTokensComponent;
-  let fixture: ComponentFixture<TrendingTokensComponent>;
+describe('LosersTokensComponent', () => {
+  let component: LosersTokensComponent;
+  let fixture: ComponentFixture<LosersTokensComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrendingTokensComponent]
+      imports: [LosersTokensComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TrendingTokensComponent);
+    fixture = TestBed.createComponent(LosersTokensComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,18 +4,17 @@ import { TokensOverviewTableComponent } from '../tokens-overview-table.component
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-popular-tokens',
+  selector: 'app-gainers-tokens',
   imports: [ TokensOverviewTableComponent ],
-  templateUrl: './popular-tokens.component.html',
-  styleUrls: ['./popular-tokens.component.scss']
+  templateUrl: './gainers-tokens.component.html',
+  styleUrl: './gainers-tokens.component.scss'
 })
-
-export class PopularTokensComponent {
+export class GainersTokensComponent {
   private marketDataService = inject(MarketDataService);
-  public tokensList = toSignal(this.marketDataService.topErc20TokensList$, { initialValue: [] });
-
+  public tokensList = toSignal(this.marketDataService.gainersERC20TokensList$, { initialValue: [] });
+  
   constructor() {
-    this.marketDataService.fetchTopERC20TokensByMarketCap();
+    this.marketDataService.fetchGainingERC20Tokens();
   }
 
 }

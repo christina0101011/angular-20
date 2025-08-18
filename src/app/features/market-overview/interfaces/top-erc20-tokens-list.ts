@@ -7,4 +7,10 @@ export interface Erc20Token {
   token_logo: string;
   token_name: string;
   token_symbol: string;
+  contract_address?: string;
+}
+
+export interface TrendingErc20TokensInterface {
+  gainers: Erc20Token[];
+  losers: Erc20Token[];
 }

@@ -1,20 +1,19 @@
-import { Erc20Token } from '@market-interfaces/top-erc20-tokens-list';
+import { Erc20Token, TrendingErc20TokensInterface } from '@market-interfaces/top-erc20-tokens-list';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { TrendingErc20TokensInterface } from '@market-interfaces/trending-erc20-tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketDataService {
-  private topErc20TokensListSubject = new BehaviorSubject<Erc20Token[] | null>(null);
+  private topErc20TokensListSubject = new BehaviorSubject<Erc20Token[]>([]);
   public topErc20TokensList$ = this.topErc20TokensListSubject.asObservable();
   
-  private gainersERC20TokensListSubject = new BehaviorSubject<TrendingErc20TokensInterface  | null>(null);
+  private gainersERC20TokensListSubject = new BehaviorSubject<Erc20Token[]>([]);
   public gainersERC20TokensList$ = this.gainersERC20TokensListSubject.asObservable();
   
-  private losersERC20TokensListSubject = new BehaviorSubject<TrendingErc20TokensInterface | null>(null);
+  private losersERC20TokensListSubject = new BehaviorSubject<Erc20Token[]>([]);
   public losersERC20TokensList$ = this.losersERC20TokensListSubject.asObservable();
 
   private readonly baseUrl = 'https://deep-index.moralis.io/api/v2';
@@ -38,11 +37,11 @@ export class MarketDataService {
       });
   }
   
-  fetchTrendingERC20Tokens(): void {
+  fetchGainingERC20Tokens(): void {
     // Only fetch if we don't have cached data
-    // if (this.trendingERC20TokensSubject.value && this.trendingERC20TokensSubject.value.length > 0) {
-    //   return;
-    // }
+    if (this.gainersERC20TokensListSubject.value && this.gainersERC20TokensListSubject.value.length > 0) {
+      return;
+    }
 
     const url = `${this.baseUrl}/market-data/erc20s/top-movers`;
     const headers = new HttpHeaders({ 'X-API-Key': this.apiKey });
@@ -51,6 +50,23 @@ export class MarketDataService {
       .subscribe({
         next: (tokens: any) => {
           this.gainersERC20TokensListSubject.next(tokens.gainers);
+        },
+        error: (err) => console.error('Error fetching tokens:', err)
+      });
+  }
+
+  fetchLosersERC20Tokens(): void {
+    // Only fetch if we don't have cached data
+    if (this.losersERC20TokensListSubject.value && this.losersERC20TokensListSubject.value.length > 0) {
+      return;
+    }
+
+    const url = `${this.baseUrl}/market-data/erc20s/top-movers`;
+    const headers = new HttpHeaders({ 'X-API-Key': this.apiKey });
+
+    this.http.get<TrendingErc20TokensInterface>(url, { headers })
+      .subscribe({
+        next: (tokens: any) => {
           this.losersERC20TokensListSubject.next(tokens.losers);
         },
         error: (err) => console.error('Error fetching tokens:', err)
