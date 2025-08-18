@@ -3,11 +3,12 @@ import { AfterViewInit, Component, effect, inject, input, ViewChild } from '@ang
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Erc20Token } from '@market-interfaces/top-erc20-tokens-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-tokens-overview-table',
-  imports: [ MatTableModule, MatSortModule ],
+  imports: [ MatTableModule, MatSortModule, MatProgressSpinnerModule ],
   templateUrl: './tokens-overview-table.component.html',
   styleUrl: './tokens-overview-table.component.scss'
 })
@@ -16,6 +17,7 @@ export class TokensOverviewTableComponent implements AfterViewInit {
   public tableData = new MatTableDataSource<Erc20Token>([]);
 
   public tokensList = input.required<Erc20Token[]>();
+  public loading: boolean = true;
   public displayedColumns: string[] = ['symbol', 'logo', 'name', 'day', 'week', 'price'];
 
   constructor() {
@@ -23,6 +25,9 @@ export class TokensOverviewTableComponent implements AfterViewInit {
       const tokens = this.tokensList();
       this.tableData = new MatTableDataSource(tokens);
       this.tableData.sort = this.sort;
+      if (tokens.length) {
+        this.loading = false;
+      }
     });
   }
   

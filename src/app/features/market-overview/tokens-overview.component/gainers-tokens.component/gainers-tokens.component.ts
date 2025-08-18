@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MarketDataService } from '@services/market-data.service';
 import { TokensOverviewTableComponent } from '../tokens-overview-table.component/tokens-overview-table.component';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -12,6 +12,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class GainersTokensComponent {
   private marketDataService = inject(MarketDataService);
   public tokensList = toSignal(this.marketDataService.gainersERC20TokensList$, { initialValue: [] });
+  public loading = signal(true);
   
   constructor() {
     this.marketDataService.fetchGainingERC20Tokens();
